@@ -4,3 +4,4 @@ tests/
 build/
 src/database/models/index.ts
 prisma/
+.github/
