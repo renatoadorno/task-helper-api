@@ -5,6 +5,6 @@ const router = Router();
 
 const controller = new UserController();
 
-router.post('/', controller.create.bind(controller));
+router.post('/create', controller.create.bind(controller));
 
 export default router;
