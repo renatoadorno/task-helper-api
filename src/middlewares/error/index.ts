@@ -1,7 +1,7 @@
-import type { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ResponseError } from '../../@types/types/error.types';
 
-const ErrorHandler = (err: ResponseError, _req: Request, res: Response) => {
+const ErrorHandler = (err: ResponseError, _req: Request, res: Response, _next: NextFunction) => {
   const { statusCode, body } = err;
 
   if (statusCode) {
