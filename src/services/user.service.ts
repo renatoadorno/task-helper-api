@@ -1,11 +1,8 @@
+import { genSaltSync, hashSync } from 'bcryptjs';
 import UserModel from '../models/UserModel';
-import Http from '../helpers/responseStatus';
-import ParamUser from '../@types/types/paramUser.types';
-import IUserService from '../@types/interfaces/userService.intefaces';
-
-// import { compareSync } from 'bcryptjs';
-// import Token from '../utils/token';
-// import type { ILoginService } from '../interfaces';
+import { ParamUser } from '../@types/types/user.types';
+import Response from '../utils/responses/user.responses';
+import IUserService from '../@types/interfaces/user.interfaces';
 
 export default class UserService implements IUserService {
   private userModel;
@@ -15,12 +12,12 @@ export default class UserService implements IUserService {
   }
 
   public async create({ name, email, password }: ParamUser) {
-    const emailExists = await this.userModel.findByEmail(email);
+    const salt = genSaltSync(5);
 
-    if (emailExists) return Http.unauthorized({ message: 'este usuario já esta cadastrado' });
+    const hashPassword = hashSync(password, salt);
 
-    const newUser = await this.userModel.create(name, email, password);
+    const newUser = await this.userModel.create(name, email, hashPassword);
 
-    return Http.created(newUser);
+    return Response.create(newUser);
   }
 }
