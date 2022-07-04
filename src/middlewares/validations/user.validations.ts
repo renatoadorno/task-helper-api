@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as joi from 'joi';
 import UserModel from '../../models/UserModel';
-import ErrorStatus from '../../utils/responses/error.responses';
+import ErrorStatus from '../../libs/res/error.res';
 
 export default class UserValidation {
   private static userModel = new UserModel();
@@ -26,11 +26,7 @@ export default class UserValidation {
 
     const emailExists = await UserValidation.userModel.findByEmail(email);
 
-    if (emailExists) {
-      const err = ErrorStatus.unauthorized({ message: 'este email já existe' });
-
-      return next(err);
-    }
+    if (emailExists) next(ErrorStatus.unauthorized({ message: 'este email já existe' }));
 
     return next();
   }
