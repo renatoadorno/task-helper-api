@@ -9,6 +9,14 @@ export default class TaskRes {
     };
   }
 
+  public static updateOk(task: Task) {
+    const code = 200;
+    return {
+      statusCode: code,
+      body: task,
+    };
+  }
+
   public static create(task: Task) {
     const code = 201;
     return {

@@ -32,4 +32,17 @@ export default class TaskController {
       next(err);
     }
   }
+
+  public async update(req: Request, res: Response, next: NextFunction):
+  Promise<Response | void> {
+    try {
+      const { id, task, status } = req.body;
+
+      const newUpdate = await this.taskService.update(id, task, status);
+
+      return res.status(newUpdate.statusCode).json(newUpdate.body);
+    } catch (err) {
+      next(err);
+    }
+  }
 }

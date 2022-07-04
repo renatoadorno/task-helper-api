@@ -34,4 +34,14 @@ export default class TaskService {
 
     return TaskRes.ok(newTasks);
   }
+
+  public async update(id: string, task: string, status: string) {
+    const verifyId = await this.taskModel.findById(id);
+
+    if (!verifyId) return ErrorRes.notFound({ message: 'Task not found' });
+
+    const newUpdate = await this.taskModel.update(id, task, status);
+
+    return TaskRes.updateOk(newUpdate);
+  }
 }

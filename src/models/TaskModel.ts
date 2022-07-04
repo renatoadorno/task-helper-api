@@ -18,4 +18,17 @@ export default class TaskModel {
     const task = await this.prismaClient.task.findMany({ where: { userId } });
     return task;
   }
+
+  public async findById(id: string): Promise<Task | null> {
+    const task = await this.prismaClient.task.findUnique({ where: { id } });
+    return task;
+  }
+
+  public async update(id: string, task: string, status: string): Promise<Task> {
+    const newUpdate = await this.prismaClient.task.update({
+      where: { id },
+      data: { task, status },
+    });
+    return newUpdate;
+  }
 }
