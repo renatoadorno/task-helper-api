@@ -20,6 +20,13 @@
   ],
   "rules": {
     "consistent-return": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ]
   }
 }
