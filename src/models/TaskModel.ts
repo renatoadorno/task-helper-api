@@ -14,7 +14,7 @@ export default class TaskModel {
     return newTask;
   }
 
-  public async findByUserId(userId: string): Promise<Task[]> {
+  public async findTasks(userId: string): Promise<Task[]> {
     const task = await this.prismaClient.task.findMany({ where: { userId } });
     return task;
   }

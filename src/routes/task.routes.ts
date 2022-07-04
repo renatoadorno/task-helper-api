@@ -6,9 +6,10 @@ import Auth from '../middlewares/auth';
 const router = Router();
 
 const controller = new TaskController();
-const { validateFields } = TasksValidation;
+const { createValidation, getValidation } = TasksValidation;
 
-router.post('/', Auth.handle, validateFields, controller.create.bind(controller));
+router.post('/', Auth.handle, createValidation, controller.create.bind(controller));
+router.get('/', Auth.handle, getValidation, controller.findTasks.bind(controller));
 // router.delete('/');
 // router.patch('/');
 

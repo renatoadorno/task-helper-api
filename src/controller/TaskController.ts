@@ -19,4 +19,17 @@ export default class TaskController {
       next(err);
     }
   }
+
+  public async findTasks(req: Request, res: Response, next: NextFunction):
+  Promise<Response | void> {
+    try {
+      const { userId } = req.body;
+
+      const newTasks = await this.taskService.findTasksByUser(userId);
+
+      return res.status(newTasks.statusCode).json(newTasks.body);
+    } catch (err) {
+      next(err);
+    }
+  }
 }

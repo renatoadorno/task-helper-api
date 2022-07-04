@@ -24,4 +24,14 @@ export default class TaskService {
 
     return TaskRes.create(newTask);
   }
+
+  public async findTasksByUser(userId: string) {
+    const verifyUserId = await this.userModel.findById(userId);
+
+    if (!verifyUserId) return ErrorRes.notFound({ message: 'User not found' });
+
+    const newTasks = await this.taskModel.findTasks(userId);
+
+    return TaskRes.ok(newTasks);
+  }
 }

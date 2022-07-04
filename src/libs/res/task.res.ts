@@ -1,27 +1,19 @@
 import { Task } from '../../@types/types/task.types';
 
-export default class LoginRes {
-  // public static ok({
-  //   id, name, email, token,
-  // }: LoginUser) {
-  //   const code = 200;
-  //   return {
-  //     statusCode: code,
-  //     body: {
-  //       id, name, email, token,
-  //     },
-  //   };
-  // }
+export default class TaskRes {
+  public static ok(tasks: Task[]) {
+    const code = 200;
+    return {
+      statusCode: code,
+      body: tasks,
+    };
+  }
 
-  public static create({
-    id, createdAt, updatedAt, task, status, userId,
-  }: Task) {
+  public static create(task: Task) {
     const code = 201;
     return {
       statusCode: code,
-      body: {
-        id, createdAt, updatedAt, task, status, userId,
-      },
+      body: task,
     };
   }
 }
