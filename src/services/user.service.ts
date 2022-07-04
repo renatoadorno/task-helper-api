@@ -1,7 +1,7 @@
-import { genSaltSync, hashSync } from 'bcryptjs';
+import HashPassword from '../libs/security/bcryptjs';
 import UserModel from '../models/UserModel';
 import { ParamUser } from '../@types/types/user.types';
-import Response from '../utils/responses/user.responses';
+import Response from '../libs/res/user.res';
 import IUserService from '../@types/interfaces/user.interfaces';
 
 export default class UserService implements IUserService {
@@ -12,11 +12,9 @@ export default class UserService implements IUserService {
   }
 
   public async create({ name, email, password }: ParamUser) {
-    const salt = genSaltSync(5);
+    const newHash = HashPassword.gen(5, password);
 
-    const hashPassword = hashSync(password, salt);
-
-    const newUser = await this.userModel.create(name, email, hashPassword);
+    const newUser = await this.userModel.create(name, email, newHash);
 
     return Response.create(newUser);
   }
