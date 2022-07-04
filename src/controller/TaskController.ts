@@ -45,4 +45,17 @@ export default class TaskController {
       next(err);
     }
   }
+
+  public async delete(req: Request, res: Response, next: NextFunction):
+  Promise<Response | void> {
+    try {
+      const { id } = req.body;
+
+      const erasing = await this.taskService.delete(id);
+
+      return res.status(erasing.statusCode).json(erasing.body);
+    } catch (err) {
+      next(err);
+    }
+  }
 }

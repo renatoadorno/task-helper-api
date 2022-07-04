@@ -44,4 +44,14 @@ export default class TaskService {
 
     return TaskRes.updateOk(newUpdate);
   }
+
+  public async delete(id: string) {
+    const verifyId = await this.taskModel.findById(id);
+
+    if (!verifyId) return ErrorRes.notFound({ message: 'Task not found' });
+
+    const erasing = await this.taskModel.delete(id);
+
+    return TaskRes.updateOk(erasing);
+  }
 }

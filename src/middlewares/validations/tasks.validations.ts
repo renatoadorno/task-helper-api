@@ -41,4 +41,16 @@ export default class TasksValidation {
 
     return next();
   }
+
+  private static deleteTaskValidationSchema = joi.object({
+    id: joi.string().required(),
+  });
+
+  public static deleteValidation(req: Request, _res: Response, next: NextFunction): void {
+    const { error } = TasksValidation.deleteTaskValidationSchema.validate(req.body);
+
+    if (error) next(ErrorStatus.badRequest({ message: error.details[0].message }));
+
+    return next();
+  }
 }

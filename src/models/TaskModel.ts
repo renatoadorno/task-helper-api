@@ -31,4 +31,9 @@ export default class TaskModel {
     });
     return newUpdate;
   }
+
+  public async delete(id: string): Promise<Task> {
+    const erasing = await this.prismaClient.task.delete({ where: { id } });
+    return erasing;
+  }
 }
