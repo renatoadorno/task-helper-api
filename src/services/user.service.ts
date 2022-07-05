@@ -1,7 +1,7 @@
 import HashPassword from '../libs/security/bcryptjs';
 import UserModel from '../models/UserModel';
 import { ParamUser } from '../@types/types/user.types';
-import Response from '../libs/res/user.res';
+import UserRes from '../libs/res/user.res';
 import IUserService from '../@types/interfaces/user.interfaces';
 
 export default class UserService implements IUserService {
@@ -16,6 +16,6 @@ export default class UserService implements IUserService {
 
     const newUser = await this.userModel.create(name, email, newHash);
 
-    return Response.create(newUser);
+    return UserRes.create(newUser);
   }
 }

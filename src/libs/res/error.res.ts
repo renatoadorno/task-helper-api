@@ -15,10 +15,10 @@ const notFound = ({ message }: ErrMessage): ResponseError => {
   return { statusCode: code, body: { message } };
 };
 
-const Error = {
+const ErrorRes = {
   badRequest,
   unauthorized,
   notFound,
 };
 
-export default Error;
+export default ErrorRes;
