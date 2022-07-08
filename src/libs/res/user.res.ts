@@ -1,4 +1,9 @@
-import { ResponseUser, User } from '../../@types/types/user.types';
+import {
+  User,
+  ResponseUser,
+  MessageSucess,
+  ResponseUserMsg,
+} from '../../@types/types/user.types';
 
 const ok = ({
   id,
@@ -18,21 +23,11 @@ const ok = ({
   };
 };
 
-const create = ({
-  id,
-  name,
-  email,
-  password,
-}: User): ResponseUser => {
+const create = ({ message }: MessageSucess): ResponseUserMsg => {
   const code = 201;
   return {
     statusCode: code,
-    body: {
-      id,
-      name,
-      email,
-      password,
-    },
+    body: { message },
   };
 };
 

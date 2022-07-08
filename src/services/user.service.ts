@@ -14,8 +14,8 @@ export default class UserService implements IUserService {
   public async create({ name, email, password }: ParamUser) {
     const newHash = HashPassword.gen(5, password);
 
-    const newUser = await this.userModel.create(name, email, newHash);
+    await this.userModel.create(name, email, newHash);
 
-    return UserRes.create(newUser);
+    return UserRes.create({ message: 'Usuario cadastrado com sucesso' });
   }
 }

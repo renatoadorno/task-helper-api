@@ -16,3 +16,12 @@ export type ResponseUser = {
   statusCode: number,
   body: User
 };
+
+export type MessageSucess = {
+  message: string,
+};
+
+export type ResponseUserMsg = {
+  statusCode: number,
+  body: MessageSucess
+};
